@@ -10,11 +10,13 @@ public class App {
         //Loading the MySQL Driver.
         Class.forName("com.mysql.cj.jdbc.Driver");
 
-        Connection connection = DriverManager.getConnection("" +
+        //Getting connected to localdb
+        Connection connection = DriverManager.getConnection(
                 "jdbc:mysql://localhost:3306/northwind",
                 "root",
                 "yearup");
 
+        //Creating our statement.
         Statement statement = connection.createStatement();
 
         String query  = "SELECT * FROM products";
