@@ -75,7 +75,7 @@ public class App {
                         nameStatement.setString(2, lastNameInput);
                         ResultSet nameResults = nameStatement.executeQuery();
 
-                        if(!nameResults.next()) {
+                        if (!nameResults.next()) {
                             System.out.println("No movies match.");
                         }
                         System.out.printf("%-35s %-12s %-15s", "First_Name", "Last_Name", "Movie_Title");
