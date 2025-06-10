@@ -73,7 +73,7 @@ public class CategoriesApp {
                     }
                 }
                 case 3: {
-                    try(PreparedStatement statement = connection.prepareStatement(categoriesQuery)) {
+                    try (PreparedStatement statement = connection.prepareStatement(categoriesQuery)) {
                         // Executing productsQuery
                         results = statement.executeQuery();
 
@@ -92,11 +92,21 @@ public class CategoriesApp {
                         int input = scanner.nextInt();
                         scanner.nextLine();
                         String selectionQuery = "SELECT * FROM Products WHERE CategoryID LIKE ?";
-                        try(PreparedStatement selection = connection.prepareStatement(selectionQuery)) {
+                        try (PreparedStatement selection = connection.prepareStatement(selectionQuery)) {
                             selection.setInt(1, input);
                             ResultSet output = selection.executeQuery();
-                        }
 
+                            System.out.printf("%-10s %-35s %-12s %-15s%n", "ProductId", "ProductName", "UnitPrice", "UnitsInStock");
+                            System.out.println("------------------------------------------------------------------------");
+
+                            while (output.next()) {
+                                int productId = output.getInt("ProductId");
+                                String productName = output.getString("ProductName");
+                                double unitPrice = output.getDouble("UnitPrice");
+                                int unitsInStock = output.getInt("UnitsInStock");
+                                System.out.printf("%-10s %-35s %-12s %-15s%n", productId, productName, unitPrice, unitsInStock);
+                            }
+                        }
                         break;
                     }
                 }
