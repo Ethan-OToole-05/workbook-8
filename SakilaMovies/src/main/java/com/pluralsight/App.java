@@ -75,13 +75,11 @@ public class App {
                         if (nameResults.next()) {
                             System.out.printf("%-10s %-35s %-12s", "ActorId", "First_Name", "Last_Name");
                             System.out.println();
-                            while (nameResults.next()) {
-                                int actorId = nameResults.getInt("actor_id");
-                                String first_name = nameResults.getString("first_name");
-                                String last_name = nameResults.getString("last_name");
-                                System.out.printf("%-10s %-35s %-12s", actorId, first_name, last_name);
-                                System.out.println();
-                            }
+                            int actorId = nameResults.getInt("actor_id");
+                            String first_name = nameResults.getString("first_name");
+                            String last_name = nameResults.getString("last_name");
+                            System.out.printf("%-10s %-35s %-12s", actorId, first_name, last_name);
+                            System.out.println();
                         } else {
                             System.out.println("No matches!");
                         }
