@@ -11,7 +11,7 @@ public class FinallyQueryApp {
         String password = args[1];
 
         String productsQuery = "SELECT * FROM Products";
-        String customersQuery = "SELECT * FROM Customers";
+        String customersQuery = "SELECT * FROM Customers ORDER BY Country";
         ResultSet results = null;
         Connection connection = null;
         PreparedStatement statement = null;
