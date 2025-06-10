@@ -1,5 +1,7 @@
 package com.pluralsight;
 
+import org.apache.commons.dbcp2.BasicDataSource;
+
 import java.sql.*;
 import java.util.Scanner;
 
@@ -16,9 +18,14 @@ public class FinallyQueryApp {
         Connection connection = null;
         PreparedStatement statement = null;
 
+        BasicDataSource dataSource = new BasicDataSource();
+        dataSource.setUrl(url);
+        dataSource.setUsername(user);
+        dataSource.setPassword(password);
+
         try {
             // Establishing connection
-            connection = DriverManager.getConnection(url, user, password);
+            connection = dataSource.getConnection();
 
             System.out.println("What do you want to do?");
             System.out.println("1) Display all products");

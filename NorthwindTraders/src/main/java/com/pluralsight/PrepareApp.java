@@ -1,5 +1,7 @@
 package com.pluralsight;
 
+import org.apache.commons.dbcp2.BasicDataSource;
+
 import java.sql.*;
 
 public class PrepareApp {
@@ -10,9 +12,14 @@ public class PrepareApp {
         String password = "yearup";
 
         String query = "SELECT * FROM Products";
+
+        BasicDataSource dataSource = new BasicDataSource();
+        dataSource.setUrl(url);
+        dataSource.setUsername(user);
+        dataSource.setPassword(password);
         try {
             // Establishing connection
-            Connection connection = DriverManager.getConnection(url, user, password);
+            Connection connection = dataSource.getConnection();
             PreparedStatement statement = connection.prepareStatement(query);
 
             // Executing query

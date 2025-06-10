@@ -1,5 +1,7 @@
 package com.pluralsight;
 
+import org.apache.commons.dbcp2.BasicDataSource;
+
 import java.sql.*;
 import java.util.Scanner;
 
@@ -10,6 +12,11 @@ public class CategoriesApp {
         String user = args[0];
         String password = args[1];
 
+        BasicDataSource dataSource = new BasicDataSource();
+        dataSource.setUrl(url);
+        dataSource.setUsername(user);
+        dataSource.setPassword(password);
+
         String productsQuery = "SELECT * FROM Products";
         String customersQuery = "SELECT * FROM Customers ORDER BY Country";
         String categoriesQuery = "SELECT * FROM Categories";
@@ -17,7 +24,7 @@ public class CategoriesApp {
 //        Connection connection = null;
 //        PreparedStatement statement = null;
 
-        try (Connection connection = DriverManager.getConnection(url, user, password)) {
+        try (Connection connection = dataSource.getConnection()) {
             // Establishing connection
             System.out.println("What do you want to do?");
             System.out.println("1) Display all products");
