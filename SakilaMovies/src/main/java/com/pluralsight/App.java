@@ -19,7 +19,12 @@ public class App {
         dataSource.setPassword(password);
 
         String lastNameQuery = "SELECT * FROM actor WHERE last_name LIKE ?";
-        String firstAndLastNameQuery = "SELECT * FROM actor WHERE first_name LIKE ? AND last_name LIKE ?";
+        //SELECT a.first_name, a.last_name, f.title FROM film_actor
+        //AS fa JOIN film AS f ON fa.film_id = f.film_id
+        //JOIN actor AS a ON fa.actor_id = a.actor_id WHERE a.first_name LIKE 'sean' AND a.last_name LIKE 'williams';
+        String firstAndLastNameQuery = "SELECT a.first_name, a.last_name, f.title FROM film_actor" +
+                " AS fa JOIN film AS f ON fa.film_id = f.film_id" +
+                " JOIN actor AS a ON fa.actor_id = a.actor_id WHERE a.first_name LIKE ? AND a.last_name LIKE ?";
 
         ResultSet results = null;
 
@@ -27,7 +32,7 @@ public class App {
 
             System.out.println("Select an option below: ");
             System.out.println("1) Display all actors by last name");
-            System.out.println("2) Display all actors by first and last name");
+            System.out.println("2) Display all movies by actor's first and last name");
             System.out.println("0) Exit");
             System.out.print("Select an option: ");
             int inputNum = input.nextInt();
@@ -39,7 +44,6 @@ public class App {
                     System.out.print("Input: ");
                     String lastNameInput = input.nextLine();
                     try (PreparedStatement statement = connection.prepareStatement(lastNameQuery)) {
-                        // Executing productsQuery
                         statement.setString(1, lastNameInput);
                         results = statement.executeQuery();
 
@@ -67,21 +71,22 @@ public class App {
                     System.out.print("Input: ");
                     String lastNameInput = input.nextLine();
                     try (PreparedStatement nameStatement = connection.prepareStatement(firstAndLastNameQuery)) {
-                        // Executing productsQuery
                         nameStatement.setString(1, firstNameInput);
                         nameStatement.setString(2, lastNameInput);
                         ResultSet nameResults = nameStatement.executeQuery();
 
-                        if (nameResults.next()) {
-                            System.out.printf("%-10s %-35s %-12s", "ActorId", "First_Name", "Last_Name");
-                            System.out.println();
-                            int actorId = nameResults.getInt("actor_id");
+                        if(!nameResults.next()) {
+                            System.out.println("No movies match.");
+                        }
+                        System.out.printf("%-35s %-12s %-15s", "First_Name", "Last_Name", "Movie_Title");
+                        System.out.println();
+                        while (nameResults.next()) {
+
                             String first_name = nameResults.getString("first_name");
                             String last_name = nameResults.getString("last_name");
-                            System.out.printf("%-10s %-35s %-12s", actorId, first_name, last_name);
+                            String title = nameResults.getString("title");
+                            System.out.printf("%-35s %-12s %-15s", first_name, last_name, title);
                             System.out.println();
-                        } else {
-                            System.out.println("No matches!");
                         }
                     }
                     break;
