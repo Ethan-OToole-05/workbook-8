@@ -41,10 +41,7 @@ public class Actor {
 
     @Override
     public String toString() {
-        return "Actor{" +
-                "actorId=" + actorId +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                '}';
+        return String.format("ActorID: %d | First Name: %s | Last Name: %s",
+                actorId, firstName, lastName);
     }
 }

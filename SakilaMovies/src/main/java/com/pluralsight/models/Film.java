@@ -61,12 +61,8 @@ public class Film {
 
     @Override
     public String toString() {
-        return "Film{" +
-                "filmId=" + filmId +
-                ", title='" + title + '\'' +
-                ", description='" + description + '\'' +
-                ", releaseYear=" + releaseYear +
-                ", length=" + length +
-                '}';
+        return String.format("FilmId: %d | Title: %s | Description: %s " +
+                        "| Year Released: %d | Movie Length: %d",
+                filmId, title, description, releaseYear, length);
     }
 }

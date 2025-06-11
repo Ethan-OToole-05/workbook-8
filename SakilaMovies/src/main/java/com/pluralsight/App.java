@@ -1,8 +1,10 @@
 package com.pluralsight;
 
 import java.sql.*;
+import java.util.List;
 import java.util.Scanner;
 
+import com.pluralsight.models.Actor;
 import org.apache.commons.dbcp2.BasicDataSource;
 
 public class App {
@@ -35,10 +37,12 @@ public class App {
         ResultSet results = null;
 
         try {
+            ActorDAO actorDAO = new ActorDAO(dataManager);
 
             System.out.println("Select an option below: ");
             System.out.println("1) Display all actors by last name");
             System.out.println("2) Display all movies by actor's first and last name");
+            System.out.println("3) Display all movies by the actor's id");
             System.out.println("0) Exit");
             System.out.print("Select an option: ");
             int inputNum = input.nextInt();
@@ -49,8 +53,8 @@ public class App {
                     System.out.println("Please enter the last name to search by: ");
                     System.out.print("Input: ");
                     String lastNameInput = input.nextLine();
-
-                    dataManager.getAllActorsByLastName(lastNameInput);
+                    System.out.println(actorDAO.getAllActorsByLastName(lastNameInput));
+//                    dataManager.getAllActorsByLastName(lastNameInput);
                     break;
                 }
                 case 2: {
@@ -62,6 +66,10 @@ public class App {
                     String lastNameInput = input.nextLine();
 
                     dataManager.getAllFilmsByActorFullName(firstNameInput, lastNameInput);
+                    break;
+                }
+                case 3: {
+
                     break;
                 }
                 case 0: {
