@@ -38,6 +38,7 @@ public class App {
 
         try {
             ActorDAO actorDAO = new ActorDAO(dataManager);
+            FilmDAO filmDAO = new FilmDAO(dataManager);
 
             System.out.println("Select an option below: ");
             System.out.println("1) Display all actors by last name");
@@ -69,7 +70,11 @@ public class App {
                     break;
                 }
                 case 3: {
-
+                    System.out.println("Please enter the actor id ");
+                    System.out.println("Input: ");
+                    int actorIdInput = input.nextInt();
+                    input.nextLine();
+                    System.out.println(filmDAO.getAllFilmsByActorId(actorIdInput));
                     break;
                 }
                 case 0: {
