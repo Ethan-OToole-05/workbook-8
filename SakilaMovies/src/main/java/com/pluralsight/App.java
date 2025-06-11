@@ -13,7 +13,7 @@ public class App {
         String user = System.getenv("DB_USER");
         String password = System.getenv("DB_PASS");
 
-        if(url == null) {
+        if (url == null) {
             url = "jdbc:mysql://127.0.0.1:3306/sakila";
         }
 
@@ -51,55 +51,19 @@ public class App {
                     String lastNameInput = input.nextLine();
 
                     dataManager.getAllActorsByLastName(lastNameInput);
-
-//                    try (PreparedStatement statement = connection.prepareStatement(lastNameQuery)) {
-//                        statement.setString(1, lastNameInput);
-//                        results = statement.executeQuery();
-//
-//                        if (results.next()) {
-//                            System.out.printf("%-10s %-35s %-12s", "ActorId", "First_Name", "Last_Name");
-//                            System.out.println();
-//                            do {
-//                                int actorId = results.getInt("actor_id");
-//                                String first_name = results.getString("first_name");
-//                                String last_name = results.getString("last_name");
-//                                System.out.printf("%-10s %-35s %-12s", actorId, first_name, last_name);
-//                                System.out.println();
-//                            } while (results.next());
-//                        } else {
-//                            System.out.println("No matches!");
-//                        }
-//                    }
                     break;
                 }
-//                case 2: {
-//                    System.out.println("Please enter the first name to search by: ");
-//                    System.out.print("Input: ");
-//                    String firstNameInput = input.nextLine();
-//                    System.out.println("Please enter the last name to search by: ");
-//                    System.out.print("Input: ");
-//                    String lastNameInput = input.nextLine();
-//                    try (PreparedStatement nameStatement = connection.prepareStatement(firstAndLastNameQuery)) {
-//                        nameStatement.setString(1, firstNameInput);
-//                        nameStatement.setString(2, lastNameInput);
-//                        ResultSet nameResults = nameStatement.executeQuery();
-//
-//                        if (!nameResults.next()) {
-//                            System.out.println("No movies match.");
-//                        }
-//                        System.out.printf("%-35s %-12s %-15s", "First_Name", "Last_Name", "Movie_Title");
-//                        System.out.println();
-//                        while (nameResults.next()) {
-//
-//                            String first_name = nameResults.getString("first_name");
-//                            String last_name = nameResults.getString("last_name");
-//                            String title = nameResults.getString("title");
-//                            System.out.printf("%-35s %-12s %-15s", first_name, last_name, title);
-//                            System.out.println();
-//                        }
-//                    }
-//                    break;
-//                }
+                case 2: {
+                    System.out.println("Please enter the first name to search by: ");
+                    System.out.print("Input: ");
+                    String firstNameInput = input.nextLine();
+                    System.out.println("Please enter the last name to search by: ");
+                    System.out.print("Input: ");
+                    String lastNameInput = input.nextLine();
+
+                    dataManager.getAllFilmsByActorFullName(firstNameInput, lastNameInput);
+                    break;
+                }
                 case 0: {
                     System.exit(0);
                 }
