@@ -74,7 +74,7 @@ public class App {
                     System.out.println("Input: ");
                     int actorIdInput = input.nextInt();
                     input.nextLine();
-                    System.out.println(filmDAO.getAllFilmsByActorId(actorIdInput));
+                    filmDAO.getAllFilmsByActorId(actorIdInput);
                     break;
                 }
                 case 0: {
