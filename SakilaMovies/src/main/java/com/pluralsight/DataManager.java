@@ -87,12 +87,22 @@ public class DataManager {
                     firstName = results.getString("first_name");
                     lastName = results.getString("last_name");
                     String title = results.getString("title");
-                    System.out.printf("%-10s %-35s %-12s",firstName, lastName, title);
+                    System.out.printf("%-10s %-35s %-12s", firstName, lastName, title);
                     System.out.println();
                 }
             }
         } catch (SQLException e) {
             System.err.println("Error getting actors: " + e.getMessage());
+        }
+    }
+
+    public BasicDataSource getDataSource() {
+        return dataSource;
+    }
+
+    public void close() throws SQLException {
+        if (dataSource != null) {
+            dataSource.close();
         }
     }
 }
