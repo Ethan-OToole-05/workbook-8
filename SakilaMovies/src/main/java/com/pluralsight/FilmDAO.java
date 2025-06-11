@@ -35,9 +35,9 @@ public class FilmDAO {
 
     public List<Film> getAllFilmsByActorId(int actorId) {
         List<Film> films = new ArrayList<>();
-        String query = "SELECT a.first_name, a.last_name, f.title FROM film_actor" +
-                " AS fa JOIN film AS f ON fa.film_id = f.film_id" +
-                " JOIN actor AS a ON fa.actor_id = a.actor_id WHERE a.actor_id = ?";
+        String query = "SELECT a.first_name, a.last_name, f.film_id,  f.title, f.description, f.release_year, f.length FROM film_actor " +
+                "AS fa JOIN film AS f ON fa.film_id = f.film_id " +
+                "JOIN actor AS a ON fa.actor_id = a.actor_id WHERE a.actor_id = ?";
 
         try (Connection connection = dataSource.getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {
@@ -46,6 +46,9 @@ public class FilmDAO {
                 while (results.next()) {
                     Film film = createFilmFromResultSet(results);
                     films.add(film);
+                }
+                for(Film film : films) {
+                    System.out.println(film);
                 }
             }
         } catch (SQLException e) {
@@ -61,8 +64,8 @@ public class FilmDAO {
         film.setFilmId(results.getInt("film_id"));
         film.setTitle(results.getString("title"));
         film.setDescription(results.getString("description"));
-        film.setReleaseYear(results.getInt("release_year "));
-        film.setLength(results.getInt("film_id"));
+        film.setReleaseYear(results.getInt("release_year"));
+        film.setLength(results.getInt("length"));
 
         return film;
     }

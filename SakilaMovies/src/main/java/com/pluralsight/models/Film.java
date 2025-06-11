@@ -64,5 +64,6 @@ public class Film {
         return String.format("FilmId: %d | Title: %s | Description: %s " +
                         "| Year Released: %d | Movie Length: %d",
                 filmId, title, description, releaseYear, length);
+
     }
 }
